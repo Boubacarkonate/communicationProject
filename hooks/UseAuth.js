@@ -1,11 +1,11 @@
+//hooks/UseAuth.js
+
 import { useContext } from "react";
-import { AuthContext, AuthProvider } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
-function UseAuth() {
+export function useAuth() {
     const context = useContext(AuthContext);
-
     return context.user;
 }
 
-export default { UseAuth, AuthProvider };
-
+export default useAuth; 

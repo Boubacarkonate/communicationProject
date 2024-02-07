@@ -1,3 +1,5 @@
+//app.js
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -24,12 +26,13 @@ export default function App() {
 
 function AuthStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name='Register' component={RegisterScreen} />
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Login'>
       <Stack.Screen name='Login' component={LoginScreen} />
+      <Stack.Screen name='Register' component={RegisterScreen} />
     </Stack.Navigator>
   )
 }
+
 
 function ChatStack() {
   return (
@@ -40,10 +43,10 @@ function ChatStack() {
 }
 
 function RootNavigator(){
-  const user = UseAuth;
+  const user = UseAuth();
 
   return (
-  <NavigationContainer>
+  <NavigationContainer >
      { user ? <ChatStack /> : <AuthStack /> } 
   </NavigationContainer>
   )

@@ -1,3 +1,4 @@
+//context/AuthContext.js
 
 import { createContext, useEffect, useState } from 'react';
 import FirebaseService from "../services/FirebaseService";

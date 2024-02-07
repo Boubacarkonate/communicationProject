@@ -1,3 +1,5 @@
+//components/LoginScreen.js
+
 import { useState } from 'react';
 import { Text, View, StyleSheet, Image, TextInput, Button } from 'react-native';
 import FirebaseService from '../../services/FirebaseService';
