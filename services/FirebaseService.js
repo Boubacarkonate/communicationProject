@@ -1,5 +1,6 @@
 //service/FirebaseService.js
 
+import Config from "./Config";
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { CollectionReference, addDoc, collection, getFirestore } from "firebase/firestore";
@@ -7,12 +8,12 @@ import { CollectionReference, addDoc, collection, getFirestore } from "firebase/
 class FirebaseService {
     constructor() {
         const firebaseConfig = {
-            apiKey: "AIzaSyAhg1KLo1qqUBGuWr0OMyFzU91MQJtg56M",
-            authDomain: "app-communication-9a463.firebaseapp.com",
-            projectId: "app-communication-9a463",
-            storageBucket: "app-communication-9a463.appspot.com",
-            messagingSenderId: "256938571973",
-            appId: "1:256938571973:web:e992f6a386e8f9bf7d98ac"
+            apiKey: Config.apiKey,
+            authDomain: Config.authDomain,
+            projectId: Config.projectId,
+            storageBucket: Config.storageBucket,
+            messagingSenderId: Config.messagingSenderId,
+            appId: Config.appId
         };
 
         const app = initializeApp(firebaseConfig);
@@ -53,7 +54,7 @@ class FirebaseService {
         try {
             await this.auth.signOut();
         } catch (error) {
-            if (error.code === 'auth/invalid-sign out') {
+            if (error.code === 'auth/invalid-signout') {
                 message = "non déconnecté";
             }
         }
@@ -65,12 +66,13 @@ class FirebaseService {
         const { _id, createdAt, text, user } = message;
     
         await addDoc(this.messageCollection, {
-            id: _id, // Utiliser l'ID de message de GiftedChat comme ID dans Firestore
+            _id, // Utiliser l'ID de message de GiftedChat comme ID dans Firestore
             createdAt,
             text,
-            userUid: user._id // Utiliser l'ID de l'utilisateur de GiftedChat comme userUid dans Firestore
+            user // Utiliser l'ID de l'utilisateur de GiftedChat comme userUid dans Firestore
         });
     }
+    
 }
 
 export default new FirebaseService();

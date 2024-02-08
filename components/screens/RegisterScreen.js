@@ -31,7 +31,7 @@ export default function RegisterScreen({ navigation }) {
                 textContentType='password'
                 placeholder='Mot de passe' 
         />
-        <Button onPress={onRegister} title="S'incrire"  />
+        <Button disabled={email.length === 0 || password.length === 0} onPress={onRegister} title="S'incrire"  />
         <Text style={styles.text}>Déjà inscrit ?</Text>
         <Button 
             color='gray' 

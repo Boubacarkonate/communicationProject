@@ -28,7 +28,7 @@ export default function RegisterScreen({ navigation }) {
                 textContentType='password'
                 placeholder='Mot de passe' 
         />
-        <Button onPress={logged} title="Se connecter" />
+        <Button disabled={email.length === 0 || password.length === 0} onPress={logged} title="Se connecter" />
         <Text style={styles.text}>Pas encore inscrit ?</Text>
         <Button 
             color='gray' 

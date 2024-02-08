@@ -8,6 +8,7 @@ import RegisterScreen from './components/screens/RegisterScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import UseAuth from './hooks/UseAuth';
 import ChatScreen from './components/screens/ChatScreen';
+import HomeScreen from './components/screens/HomeScreen';
 import { AuthProvider } from './context/AuthContext';
 
 
@@ -22,6 +23,15 @@ export default function App() {
 
       
   );  
+}
+
+function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name='Home' component={HomeScreen} />
+      <Stack.Screen name='Chat' component={ChatScreen} />
+    </Stack.Navigator>
+  )
 }
 
 function AuthStack() {
@@ -42,12 +52,13 @@ function ChatStack() {
   )
 }
 
+
 function RootNavigator(){
   const user = UseAuth();
 
   return (
   <NavigationContainer >
-     { user ? <ChatStack /> : <AuthStack /> } 
+     { user ? <HomeStack /> : <AuthStack /> } 
   </NavigationContainer>
   )
 }

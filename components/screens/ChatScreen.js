@@ -30,10 +30,10 @@ export default function ChatScreen({ navigation }) {
     
         const unsubscribe = onSnapshot(q, querySnapshot => {
             const messages = querySnapshot.docs.map(doc => ({
-                _id: doc.data().id,
+                _id: doc.id, // Utilisez doc.id pour obtenir l'ID du document Firestore
                 createdAt: doc.data().createdAt.toDate(),
                 text: doc.data().text,
-                user:{ _id: doc.data().userUid } 
+                user: doc.data().user 
             }));
             setMessages(messages);
         });
@@ -53,14 +53,25 @@ export default function ChatScreen({ navigation }) {
     }, [navigation, onLogout]);
 
     return (
-        <GiftedChat
-            messages={messages}
-            user={{ _id: user?.uid }}
-            onSend={(messages) => onSend(messages)}
-        />
+        <View style={{ flex: 1 }}>
+            <Text style={styles.userInfo}>Connecté en tant que : {user.email}</Text>
+            <GiftedChat
+                messages={messages}
+                showUserAvatar={true}
+                renderAvatarOnTop={true}
+                showAvatarForEveryMessage={true}
+                user={{ _id: user?.uid, avatar: 'https://i.pravatar.cc/300', name: 'React Native', }}
+                onSend={onSend}
+            />
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-
+    userInfo: {
+        textAlign: 'center',
+        padding: 10,
+        backgroundColor: '#eee',
+        marginBottom: 10
+    }
 });
